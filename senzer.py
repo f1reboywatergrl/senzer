@@ -9,7 +9,6 @@ print("""
   \__ \/ _ \/ __ \/ /  / _ \/ ___/
  ___/ /  __/ / / / /__/  __/ /    
 /____/\___/_/ /_/____/\___/_/     
-
 Sentiment AnalyZer using Python                                  
 """)
 keyword = input("Please enter the sentiment keyword(s): ")
@@ -30,13 +29,22 @@ while(hasilinput!='5'):
             consumer_key = input("Please enter your consumer key: ")
             consumer_secret = input("Please enter your secret consumer key: ")
             access_token = input("Please enter your access token: ")
-            access_token_secret = input("Please enter you secret access token: ")
+            access_token_secret = input("Please enter your secret access token: ")
             auth = tweepy.OAuthHandler(consumer_key,consumer_secret)
             auth.set_access_token(access_token,access_token_secret)
 
-            api = tweepy.API(auth)
-
             print("Checking tokens... please hold on.")
+            #Checking Tokens
+            api = tweepy.API(auth)
+            test_array=[]
+            test_tokens = tweepy.Cursor(api.search, q="test",
+                tweet_mode='extended', lang='id').items(5)
+            for x in test_tokens:
+                test_array.append(str(x.created_at))
+
+            print("\nTokens confirmed as valid.\n")
+            n_scrapes = int(input("Number of tweets to scrape : "))
+            print("Updating data... please hold on.\n")
             #Mencari tanggal pencarian
 
             def caritanggal():
@@ -109,8 +117,6 @@ while(hasilinput!='5'):
                 tweetdate.append(str(create_date[0:11]))
                 items.append(' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet.full_text).split()))
             #Move tweet to CSV
-            print("\nTokens confirmed as valid.")
-            print("Updating data... please hold on.\n")
             hasil2 = pd.DataFrame(items, columns = ['tweet'])
             hasil = pd.DataFrame(tweetdate, columns = ['date'])
             hasil3 = pd.DataFrame(user, columns = ['user'])
@@ -236,7 +242,7 @@ while(hasilinput!='5'):
             connection.commit()
             connection.close()
         except:
-            print("\nInputs were invalid. Please recheck your input, and double-check your input format.\n")
+            print("\nInputs were invalid. Please recheck your input, and double-check your input format. Also consider checking if the database exists.\n")
     elif (hasilinput=='4'):
         #Open Connection
         connection = sqlite3.connect('tweetdatabase.db')
@@ -282,7 +288,7 @@ while(hasilinput!='5'):
             plt.gca().set_xticks(labels)
             plt.show()
         except:
-            print("\nInputs were invalid. Please recheck your input, and double-check your input format.\n")
+            print("\nInputs were invalid. Please recheck your input, and double-check your input format. Also consider checking if the database exists.\n")
 
     else:
         print("Please enter a valid input.")
