@@ -105,7 +105,7 @@ while(hasilinput!='5'):
 
             #Tweet Search Parameters
             tweets = tweepy.Cursor(api.search, q=new_search,
-                tweet_mode='extended', lang='id',since=date_since).items(5) 
+                tweet_mode='extended', lang='id',since=date_since).items(n_scrapes) 
             #Tweet Preprocessing
             tweetdate = []
             items = []
