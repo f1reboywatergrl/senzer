@@ -20,9 +20,9 @@ print("""Welcome! Please input a number to continue.
         4. Visualize Data
         5. Exit Program
     """)
-hasilinput = (input("Your Input :\n"))
+hasilinput = (input("Your Input :"))
 #Menggunakan 5 sebagai mark,
-while(hasilinput!='5'):
+while(hasilinput!='5'):    
     if(hasilinput=='1'):
         try:
             print("Please check your Twitter Developer Account for the keys.")
@@ -214,8 +214,8 @@ while(hasilinput!='5'):
 
         #Ambil batas tanggal
         try:
-            awal=str(input("tanggal awal (format: 2020-04-24) : "))
-            akhir=str(input("tanggal akhir (format: 2020-04-24) : "))
+            awal=str(input("From... (format: 2020-04-24) : "))
+            akhir=str(input("until... (format: 2020-04-24) : "))
             awal = (awal.split('-'))
             akhir = (akhir.split('-'))
 
@@ -252,8 +252,8 @@ while(hasilinput!='5'):
         hasil = cursor.fetchall()
         try:
             #Ambil batas tanggal
-            awal=str(input("tanggal awal (format: 2020-04-24) : "))
-            akhir=str(input("tanggal akhir (format: 2020-04-24) : "))
+            awal=str(input("From... (format: 2020-04-24) : "))
+            akhir=str(input("until... (format: 2020-04-24) : "))
             
             awal = (awal.split('-'))
             akhir = (akhir.split('-'))
@@ -278,9 +278,9 @@ while(hasilinput!='5'):
             df= pd.DataFrame(in_range)
 
             #Print Stdev, Median, Mean
-            print("Nilai rata-rata: "+str(np.mean(df["sentiment"])))
-            print("Nilai Median: "+str(np.median(df["sentiment"])))
-            print("Standar Deviasi: "+str(np.std(df["sentiment"])))
+            print("Mean: "+str(np.mean(df["sentiment"])))
+            print("Median: "+str(np.median(df["sentiment"])))
+            print("Standard Deviation: "+str(np.std(df["sentiment"])))
 
             #Visualisasi Data
             labels, counts = np.unique(df["sentiment"], return_counts=True)
@@ -292,8 +292,7 @@ while(hasilinput!='5'):
 
     else:
         print("Please enter a valid input.")
-
-    print("""Welcome! Please input a number to continue.
+    print("""Please input a number to continue.
         1. Update Data
         2. Update Sentiment Score
         3. Display Data
@@ -301,3 +300,4 @@ while(hasilinput!='5'):
         5. Exit Program
     """)
     hasilinput = (input("Your Input :\n"))
+print("Thank you!")
